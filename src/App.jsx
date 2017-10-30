@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-
 const firebase = require("firebase");
+
+// Initialize Firebase
 const config = {
   apiKey: "AIzaSyDYTb0anggV7RGEKfbwlFcaZ2LLCkuzz24",
   authDomain: "fir-fundamentals-5da3d.firebaseapp.com",
@@ -10,38 +11,20 @@ const config = {
   storageBucket: "fir-fundamentals-5da3d.appspot.com",
   messagingSenderId: "936198909818"
 };
-
 firebase.initializeApp(config);
-
 const database = firebase.database();
 
+var r = database.ref("/push/test2");
+for (var i = 0; i < 10; i++) {
+  r.push().set(i * 2);
+}
+setTimeout(() => r.once("value").then(x => console.log(x.val()), 1000)); //wait for the DB to digest
+
 class App extends Component {
-  constructor() {
-    super();
-    this.state = { message: "" };
-  }
-
-  saveOnClick = () => {
-    database.ref("/name").set(this.input.value);
-  };
-
-  componentDidMount = () => {
-    database
-      .ref("/name")
-      .once("value")
-      .then(data => {
-        console.log(data);
-        this.setState({ message: data.val() });
-        console.log(this.state);
-      });
-  };
-
   render() {
     return (
       <div className="App">
-        <h1>{this.state.message}</h1>
-        <input type="text" ref={node => (this.input = node)} />
-        <button onClick={this.saveOnClick}>Save</button>
+        <h1>Hello World</h1>
       </div>
     );
   }

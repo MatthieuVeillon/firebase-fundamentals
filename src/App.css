@@ -22,7 +22,19 @@
   font-size: large;
 }
 
+.chat {
+  border: 1px solid black;
+  width: 500px;
+  text-align: left;
+  padding: 10px;
+  margin: 20px auto;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
